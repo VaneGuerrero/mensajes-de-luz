@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mensajes de Luz — Oracle angélico con los siete arcángeles principales">
+<meta name="theme-color" content="#05030f">
+<title>Mensajes de Luz ✦ Oracle Angélico</title>
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --miguel:#1a4fa0;--miguel2:#4a90d9;--miguel3:#c8900a;
+  --gabriel:#3a3a6a;--gabriel2:#9090c0;--gabriel3:#e8e8ff;
+  --rafael:#0a5a2a;--rafael2:#3aaa5a;--rafael3:#90e890;
+  --uriel:#8a4000;--uriel2:#e8a800;--uriel3:#ffd060;
+  --chamuel:#7a1a50;--chamuel2:#e870a0;--chamuel3:#ffb0d0;
+  --jofiel:#7a6a00;--jofiel2:#d0a800;--jofiel3:#f8e060;
+  --zadquiel:#3a0a7a;--zadquiel2:#9040e0;--zadquiel3:#c080ff;
+}
+html,body{height:100%;overflow-x:hidden}
+body{
+  background:#05030f;
+  color:#f0e8d0;
+  font-family:'Cormorant Garamond',serif;
+  min-height:100vh;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.app{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+  padding-bottom:40px;
+}
+#starCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#particleCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+
+/* ── HEADER ── */
+.header{
+  position:relative;z-index:10;
+  text-align:center;
+  padding:36px 20px 10px;
+  width:100%;
+}
+.header-eyebrow{
+  font-family:'Cinzel',serif;
+  font-size:9px;letter-spacing:5px;
+  color:#b8a070;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.header-title{
+  font-family:'Cinzel',serif;
+  font-size:26px;font-weight:600;
+  color:#f5e8c0;line-height:1.2;
+  text-shadow:0 0 40px rgba(200,160,80,0.6);
+}
+.header-sub{
+  font-size:13px;font-style:italic;
+  color:#9080a0;margin-top:8px;letter-spacing:0.5px;
+}
+
+/* ── MAIN PHRASE ── */
+.main-phrase{
+  position:relative;z-index:10;
+  text-align:center;padding:18px 28px 10px;
+  max-width:360px;
+}
+.phrase-line1{font-size:13px;color:#b8a070;letter-spacing:1px;margin-bottom:6px;font-style:italic}
+.phrase-line2{font-family:'Cinzel',serif;font-size:16px;color:#e8d090;line-height:1.5}
+.phrase-line3{font-size:12px;color:#8070a0;margin-top:8px;font-style:italic;letter-spacing:0.5px}
+
+/* ── WHEEL ── */
+.wheel-section{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;align-items:center;
+  margin:14px 0 6px;
+}
+.wheel-wrapper{
+  position:relative;width:300px;height:300px;
+  display:flex;align-items:center;justify-content:center;
+}
+.breathe-ring{
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(200,160,80,0.1);
+  pointer-events:none;
+  animation:breatheOut 4s ease-in-out infinite;
+}
+@keyframes breatheOut{
+  0%,100%{transform:scale(0.92);opacity:0.6}
+  50%{transform:scale(1.08);opacity:0.15}
+}
+.wheel-glow{
+  position:absolute;width:300px;height:300px;
+  border-radius:50%;pointer-events:none;
+  transition:box-shadow 0.8s ease;
+}
+#wheelCanvas{
+  position:relative;z-index:2;cursor:pointer;
+  border-radius:50%;
+  filter:drop-shadow(0 0 24px rgba(150,120,200,0.35));
+  transition:filter 0.5s ease;
+}
+#wheelCanvas:active{transform:scale(0.98)}
+.wheel-center{
+  position:absolute;z-index:5;
+  width:54px;height:54px;border-radius:50%;
+  background:radial-gradient(circle,#1a1020 0%,#0a0815 100%);
+  border:1.5px solid rgba(200,160,80,0.5);
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+  box-shadow:0 0 24px rgba(200,160,80,0.3),inset 0 0 16px rgba(0,0,0,0.8);
+}
+.center-symbol{font-size:22px;animation:centerPulse 3s ease-in-out infinite}
+@keyframes centerPulse{
+  0%,100%{opacity:0.7;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.12)}
+}
+.spin-pointer{
+  position:absolute;top:-10px;left:50%;
+  transform:translateX(-50%);z-index:6;
+  width:0;height:0;
+  border-left:9px solid transparent;
+  border-right:9px solid transparent;
+  border-bottom:24px solid #e8c060;
+  filter:drop-shadow(0 0 10px rgba(232,192,96,0.9));
+}
+
+/* ── SPIN BUTTON ── */
+.spin-btn{
+  position:relative;z-index:10;
+  margin:18px 0 10px;
+  padding:15px 52px;
+  background:transparent;
+  border:1px solid rgba(200,160,80,0.4);
+  color:#e8d090;
+  font-family:'Cinzel',serif;font-size:13px;
+  letter-spacing:3px;cursor:pointer;
+  border-radius:2px;
+  transition:all 0.3s ease;
+  text-transform:uppercase;overflow:hidden;
+}
+.spin-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(200,160,80,0.06),rgba(150,100,200,0.06));
+  opacity:0;transition:opacity 0.3s;
+}
+.spin-btn:hover::before{opacity:1}
+.spin-btn:hover{
+  border-color:rgba(200,160,80,0.9);color:#f5e8c0;
+  box-shadow:0 0 24px rgba(200,160,80,0.25),inset 0 0 24px rgba(200,160,80,0.06);
+}
+.spin-btn:active{transform:scale(0.97)}
+.spin-btn:disabled{opacity:0.35;cursor:not-allowed;transform:none}
+
+/* ── ARC TAGS ── */
+.arc-names{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:6px;max-width:330px;
+  margin-top:4px;z-index:10;position:relative;
+}
+.arc-tag{
+  font-size:9px;letter-spacing:1.5px;
+  padding:4px 9px;border-radius:1px;
+  border:1px solid;text-transform:uppercase;
+  opacity:0.55;transition:all 0.4s;cursor:default;
+}
+.arc-tag.active{opacity:1;transform:scale(1.06)}
+
+/* ── MESSAGE CARD OVERLAY ── */
+.card-overlay{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(5,3,15,0);
+  pointer-events:none;
+  transition:background 0.5s ease;
+  padding:16px;
+}
+.card-overlay.visible{
+  background:rgba(5,3,15,0.88);
+  pointer-events:all;
+}
+.message-card{
+  position:relative;
+  width:330px;max-width:100%;
+  transform:scale(0.82) translateY(36px);
+  opacity:0;
+  transition:all 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events:none;
+}
+.card-overlay.visible .message-card{
+  transform:scale(1) translateY(0);
+  opacity:1;pointer-events:all;
+}
+.card-glass{
+  background:rgba(10,8,22,0.94);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:14px;
+  overflow:hidden;
+  backdrop-filter:blur(24px);
+}
+.card-top-bar{height:4px;width:100%}
+.card-inner{padding:28px 26px 22px;position:relative}
+.close-btn{
+  position:absolute;top:14px;right:16px;
+  background:none;border:none;
+  color:rgba(200,180,150,0.45);
+  font-size:20px;cursor:pointer;
+  transition:color 0.2s;
+  font-family:'Cormorant Garamond',serif;line-height:1;
+  padding:4px;
+}
+.close-btn:hover{color:rgba(200,180,150,1)}
+.card-arc-name{
+  font-family:'Cinzel',serif;font-size:19px;font-weight:600;
+  text-align:center;margin-bottom:4px;
+}
+.card-arc-title{
+  font-size:11px;letter-spacing:3px;
+  text-align:center;text-transform:uppercase;
+  opacity:0.55;margin-bottom:14px;
+}
+.card-symbol{
+  text-align:center;font-size:40px;
+  margin:14px 0;
+  animation:symbolFloat 4s ease-in-out infinite;
+}
+@keyframes symbolFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+.card-divider{
+  width:64px;height:1px;
+  margin:10px auto 16px;opacity:0.3;
+}
+.card-message{
+  font-size:15.5px;line-height:1.85;
+  text-align:center;color:#ede4cc;
+  font-style:italic;
+  margin-bottom:16px;padding:0 2px;
+}
+.card-affirmation{
+  font-family:'Cinzel',serif;
+  font-size:11px;letter-spacing:2px;
+  text-align:center;text-transform:uppercase;
+  padding:11px 14px;border-radius:4px;
+  border:1px solid rgba(255,255,255,0.07);
+  margin-bottom:10px;line-height:1.6;
+}
+.card-energy{
+  font-size:10px;letter-spacing:2px;
+  text-align:center;margin-bottom:18px;
+  opacity:0.45;text-transform:uppercase;
+}
+.card-actions{
+  display:flex;gap:8px;justify-content:center;
+  flex-wrap:wrap;
+}
+.card-btn{
+  padding:10px 18px;border-radius:2px;
+  font-family:'Cinzel',serif;font-size:10px;
+  letter-spacing:2px;cursor:pointer;
+  text-transform:uppercase;transition:all 0.2s;
+  border:1px solid rgba(255,255,255,0.12);
+  background:transparent;color:#d0c8b0;
+}
+.card-btn:hover{background:rgba(255,255,255,0.07);color:#f0e8c8}
+.card-btn:active{transform:scale(0.96)}
+
+/* ── HISTORY ── */
+.history-section{
+  position:relative;z-index:10;
+  width:100%;max-width:350px;
+  padding:0 16px 20px;
+}
+.history-title{
+  font-family:'Cinzel',serif;font-size:10px;
+  letter-spacing:3px;text-transform:uppercase;
+  color:#605080;text-align:center;
+  margin:24px 0 14px;
+}
+.history-list{display:flex;flex-direction:column;gap:8px}
+.history-item{
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.05);
+  border-left-width:2px;
+  border-radius:6px;
+  padding:11px 14px;
+  display:flex;gap:12px;align-items:center;
+  cursor:pointer;transition:all 0.2s;
+}
+.history-item:hover{background:rgba(255,255,255,0.055)}
+.hist-symbol{font-size:22px;flex-shrink:0}
+.hist-info{flex:1;min-width:0}
+.hist-name{
+  font-family:'Cinzel',serif;
+  font-size:11px;letter-spacing:1px;margin-bottom:3px;
+}
+.hist-preview{
+  font-size:11px;color:#6a5a80;
+  white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;font-style:italic;
+}
+.hist-time{font-size:9px;color:#483a5a;letter-spacing:1px;flex-shrink:0}
+
+/* ── EMPTY HISTORY ── */
+.history-empty{
+  text-align:center;font-size:12px;font-style:italic;
+  color:#4a3a6a;padding:20px 0;letter-spacing:0.5px;
+}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(60px);
+  background:rgba(18,12,32,0.97);
+  border:1px solid rgba(200,160,80,0.28);
+  color:#e8d090;padding:11px 22px;
+  border-radius:3px;font-size:12px;
+  letter-spacing:1px;z-index:200;
+  transition:transform 0.35s cubic-bezier(0.34,1.4,0.64,1);
+  pointer-events:none;white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── AMBIENT TOGGLE ── */
+.ambient-btn{
+  position:fixed;top:16px;right:16px;z-index:50;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(200,160,80,0.2);
+  color:#b8a070;font-size:16px;
+  width:36px;height:36px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.ambient-btn:hover{background:rgba(200,160,80,0.1);color:#e8c070}
+
+/* ── RESPONSIVE ── */
+@media(max-width:380px){
+  .header-title{font-size:22px}
+  .wheel-wrapper{width:270px;height:270px}
+  #wheelCanvas{width:252px!important;height:252px!important}
+  .wheel-glow{width:270px;height:270px}
+  .breathe-ring:first-child{width:288px!important;height:288px!important;top:-9px!important;left:-9px!important}
+  .breathe-ring:last-child{width:308px!important;height:308px!important;top:-19px!important;left:-19px!important}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <canvas id="starCanvas"></canvas>
+  <canvas id="particleCanvas"></canvas>
+
+  <button class="ambient-btn" id="ambientBtn" title="Música ambiental">♪</button>
+
+  <div class="header">
+    <div class="header-eyebrow">✦ Portal Angélico ✦</div>
+    <div class="header-title">Mensajes de Luz</div>
+    <div class="header-sub">Guiados por los Siete Arcángeles</div>
+  </div>
+
+  <div class="main-phrase">
+    <div class="phrase-line1">Mensajes de luz desde el cielo</div>
+    <div class="phrase-line2">Gira y escucha tu corazón</div>
+    <div class="phrase-line3">Recibe la guía que iluminará tu día</div>
+  </div>
+
+  <div class="wheel-section">
+    <div class="wheel-wrapper">
+      <div class="breathe-ring" style="width:322px;height:322px;top:-11px;left:-11px;animation-delay:0s"></div>
+      <div class="breathe-ring" style="width:344px;height:344px;top:-22px;left:-22px;animation-delay:1.6s"></div>
+      <div class="wheel-glow" id="wheelGlow"></div>
+      <canvas id="wheelCanvas" width="284" height="284"></canvas>
+      <div class="wheel-center"><span class="center-symbol">✦</span></div>
+      <div class="spin-pointer"></div>
+    </div>
+  </div>
+
+  <button class="spin-btn" id="spinBtn">☽ Girar la Rueda</button>
+
+  <div class="arc-names" id="arcNames"></div>
+
+  <div class="history-section">
+    <div class="history-title">✦ Lecturas Recientes ✦</div>
+    <div class="history-list" id="historyList">
+      <div class="history-empty">Gira la rueda para recibir tu primer mensaje</div>
+    </div>
+  </div>
+</div>
+
+<!-- MESSAGE CARD -->
+<div class="card-overlay" id="cardOverlay">
+  <div class="message-card" id="messageCard">
+    <div class="card-glass">
+      <div class="card-top-bar" id="cardTopBar"></div>
+      <div class="card-inner">
+        <button class="close-btn" id="closeCard" aria-label="Cerrar">✕</button>
+        <div class="card-arc-name" id="cardArcName"></div>
+        <div class="card-arc-title" id="cardArcTitle"></div>
+        <div class="card-symbol" id="cardSymbol"></div>
+        <div class="card-divider" id="cardDivider"></div>
+        <div class="card-message" id="cardMessage"></div>
+        <div class="card-affirmation" id="cardAffirmation"></div>
+        <div class="card-energy" id="cardEnergy"></div>
+        <div class="card-actions">
+          <button class="card-btn" id="btnFavorite">♡ Guardar</button>
+          <button class="card-btn" id="btnShare">↗ Compartir</button>
+          <button class="card-btn" id="btnNew">↻ Nueva lectura</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════
+const ARCHANGELS = [
+  {
+    name:'Arcángel Miguel', short:'Miguel', title:'Protector Celestial', symbol:'⚔',
+    color1:'#1a4fa0', color2:'#4a90d9', color3:'#c8900a',
+    glow:'rgba(74,144,217,0.5)', textColor:'#7ab8f0',
+    affirmationBg:'rgba(26,79,160,0.15)', segColors:['#1a3080','#4a80c0'],
+    intros:[
+      'La espada de luz de Miguel disuelve toda sombra que se cierne sobre ti.',
+      'El Arcángel Miguel despliega sus alas azules en torno a tu corazón hoy.',
+      'Una armadura de luz celestial te envuelve en este momento sagrado.',
+      'Miguel, guardián del cielo, ha escuchado el llamado silencioso de tu alma.',
+      'El fuego azul de Miguel purifica el camino ante ti.'
+    ],
+    guides:[
+      'No hay batalla que tu espíritu no pueda atravesar con gracia y valor.',
+      'Suelta el peso de los miedos que ya no te pertenecen. Han cumplido su propósito.',
+      'La fuerza que buscas afuera ya vive encendida dentro de ti.',
+      'Es tiempo de actuar desde tu poder, no desde tu miedo.',
+      'Confía en la protección divina que rodea cada paso que das.',
+      'Corta los lazos que te retienen. Eres más libre de lo que crees.',
+      'La valentía no es ausencia de miedo, es elegir avanzar a pesar de él.'
+    ],
+    affirmations:[
+      'Soy protegido, soy libre, soy luz',
+      'La fuerza divina fluye a través de mí',
+      'Corto con todo lo que no me sirve',
+      'Mi camino está iluminado y protegido'
+    ],
+    energies:['Protección · Valentía · Acción','Fuerza · Claridad · Coraje','Poder · Luz · Propósito']
+  },
+  {
+    name:'Arcángel Gabriel', short:'Gabriel', title:'Mensajero Divino', symbol:'🪶',
+    color1:'#2a2a5a', color2:'#8080b8', color3:'#d0d0f0',
+    glow:'rgba(128,128,184,0.5)', textColor:'#b0b0e0',
+    affirmationBg:'rgba(60,60,120,0.15)', segColors:['#2a2a5a','#6060a0'],
+    intros:[
+      'Las plumas blancas de Gabriel susurran una verdad profunda a tu corazón.',
+      'El Mensajero Divino trae hoy una señal que tu alma estaba esperando.',
+      'En el silencio entre tus pensamientos, Gabriel ha dejado un mensaje para ti.',
+      'La niebla se despeja. Gabriel ilumina el camino que no podías ver.',
+      'Una luz perlada y suave desciende sobre tu mente en este instante.'
+    ],
+    guides:[
+      'No necesitas tener todas las respuestas para dar el primer paso.',
+      'La inspiración que buscas ya está fluyendo hacia ti. Solo necesitas recibir.',
+      'Es momento de confiar en esa voz suave que llevas tiempo ignorando.',
+      'Un nuevo ciclo comienza. Déjate renovar por la gracia divina.',
+      'Tu creatividad es un regalo sagrado. Honrala sin juicio ni miedo.',
+      'Las señales ya están llegando. Aprende a leer el lenguaje del universo.',
+      'La claridad llega cuando aquietas la mente y abres el corazón.'
+    ],
+    affirmations:[
+      'Recibo la guía divina con claridad',
+      'Mi intuición es mi luz interior',
+      'Estoy abierto a los mensajes del cielo',
+      'La renovación llega a mi vida ahora'
+    ],
+    energies:['Claridad · Mensajes · Renovación','Inspiración · Intuición · Verdad','Creatividad · Guía · Comienzos']
+  },
+  {
+    name:'Arcángel Rafael', short:'Rafael', title:'Sanador del Cielo', symbol:'✦',
+    color1:'#0a4a22', color2:'#2a9a4a', color3:'#80e880',
+    glow:'rgba(42,154,74,0.5)', textColor:'#60c878',
+    affirmationBg:'rgba(10,74,34,0.2)', segColors:['#0a4020','#2a7840'],
+    intros:[
+      'La luz verde esmeralda de Rafael envuelve cada célula de tu ser.',
+      'Rafael extiende sus manos sanadoras sobre todo lo que te duele hoy.',
+      'Una energía de profunda sanación está fluyendo hacia ti en este momento.',
+      'El Arcángel Rafael llega para restaurar lo que necesita ser sanado.',
+      'El verde eterno de Rafael toca tu corazón con ternura y poder.'
+    ],
+    guides:[
+      'Tu cuerpo, tu mente y tu alma están siendo envueltos en luz sanadora ahora mismo.',
+      'El equilibrio que buscas comienza cuando te permites descansar sin culpa.',
+      'La naturaleza tiene mensajes de paz para ti. Respira y recíbelos.',
+      'Sanar no es debilidad. Es el acto más valiente del alma.',
+      'Mereces bienestar en todos los niveles de tu ser.',
+      'Respira profundo. En cada respiración hay una dosis de gracia divina.',
+      'El amor propio es la medicina más poderosa que existe. Practícalo hoy.'
+    ],
+    affirmations:[
+      'Soy salud, soy paz, soy equilibrio',
+      'La sanación fluye libremente por mí',
+      'Me permito descansar y renovarme',
+      'Mi ser completo está siendo restaurado'
+    ],
+    energies:['Sanación · Equilibrio · Paz','Bienestar · Amor · Restauración','Salud · Armonía · Serenidad']
+  },
+  {
+    name:'Arcángel Uriel', short:'Uriel', title:'Luz de Sabiduría', symbol:'◈',
+    color1:'#7a3800', color2:'#d09000', color3:'#f8c840',
+    glow:'rgba(208,144,0,0.5)', textColor:'#e8b830',
+    affirmationBg:'rgba(120,56,0,0.2)', segColors:['#6a3000','#b07000'],
+    intros:[
+      'El fuego dorado de Uriel enciende la claridad en tu mente y tu corazón.',
+      'Uriel, portador de la llama de la sabiduría, ilumina tu sendero hoy.',
+      'La prosperidad tiene muchas formas. Uriel te ayuda a verlas todas.',
+      'Una luz ámbar cálida rodea tus decisiones y tus sueños este día.',
+      'Uriel derrama su abundancia sobre cada área de tu vida ahora mismo.'
+    ],
+    guides:[
+      'La abundancia no es solo material. También es paz, salud y amor. Ya la tienes.',
+      'Tu mente es un instrumento poderoso cuando la alimentas con pensamientos de luz.',
+      'Las respuestas que buscas están más cerca de lo que crees.',
+      'Es tiempo de expandirte. La prosperidad fluye hacia quienes se abren a recibirla.',
+      'La sabiduría divina está disponible para ti en cada momento de quietud.',
+      'Confía en tu inteligencia interior. Ha estado guiándote desde siempre.',
+      'La abundancia comienza en la mente. Transforma tus pensamientos, transforma tu vida.'
+    ],
+    affirmations:[
+      'Merezco abundancia en todas sus formas',
+      'La prosperidad fluye hacia mí naturalmente',
+      'Mi mente está llena de claridad y sabiduría',
+      'Abro mis manos y mi corazón a recibir'
+    ],
+    energies:['Abundancia · Sabiduría · Prosperidad','Claridad · Manifestación · Luz','Expansión · Enfoque · Gratitud']
+  },
+  {
+    name:'Arcángel Chamuel', short:'Chamuel', title:'Corazón del Amor', symbol:'♡',
+    color1:'#6a1548', color2:'#d86090', color3:'#f8a0c0',
+    glow:'rgba(216,96,144,0.5)', textColor:'#e888b0',
+    affirmationBg:'rgba(106,21,72,0.2)', segColors:['#5a1040','#a85070'],
+    intros:[
+      'Chamuel envuelve tu corazón en una luz rosada de amor incondicional.',
+      'El amor que mereces ya existe. Chamuel te guía a reconocerlo.',
+      'Una suave energía de compasión desciende sobre ti en este momento.',
+      'Chamuel, el arcángel del amor, tiene un mensaje especial para tu corazón.',
+      'La rosa divina de Chamuel florece hoy en el jardín de tu alma.'
+    ],
+    guides:[
+      'El amor más transformador comienza en la relación que tienes contigo mismo.',
+      'Mereces ser amado exactamente como eres, sin condiciones ni excepciones.',
+      'Abre tu corazón. Las conexiones profundas que anhelas están llegando.',
+      'La compasión que das a otros, también dátela a ti mismo hoy.',
+      'Toda relación es un espejo que te muestra algo sagrado sobre ti.',
+      'El amor no llega para completarte. Llega para recordarte que ya eres completo.',
+      'Ámate primero. Todo lo demás fluirá desde ese lugar sagrado.'
+    ],
+    affirmations:[
+      'Soy digno de amor profundo e incondicional',
+      'Mi corazón está abierto a dar y recibir amor',
+      'Me amo y me acepto completamente ahora',
+      'El amor divino fluye a través de mi vida'
+    ],
+    energies:['Amor · Compasión · Autoestima','Conexión · Ternura · Pertenencia','Relaciones · Corazón · Gracia']
+  },
+  {
+    name:'Arcángel Jofiel', short:'Jofiel', title:'Iluminador del Alma', symbol:'✺',
+    color1:'#6a5a00', color2:'#c09800', color3:'#f0d840',
+    glow:'rgba(192,152,0,0.5)', textColor:'#d8b020',
+    affirmationBg:'rgba(106,90,0,0.2)', segColors:['#5a4a00','#9a7800'],
+    intros:[
+      'Los rayos dorados de Jofiel despiertan la creatividad dormida en tu interior.',
+      'Jofiel, el Iluminador, llega hoy para encender la chispa de tu genialidad.',
+      'Una lluvia de inspiración dorada está descendiendo sobre tu mente ahora.',
+      'La belleza del universo se refleja en ti. Jofiel te lo recuerda hoy.',
+      'Jofiel enciende la antorcha de la sabiduría sobre tu camino.'
+    ],
+    guides:[
+      'Tu mente es un lienzo divino. Pinta sobre él con la pintura de tus sueños.',
+      'La inspiración que esperas no vendrá después. Está disponible ahora mismo.',
+      'Encuentra la belleza en lo cotidiano y lo ordinario se volverá sagrado.',
+      'Tu perspectiva es única en todo el universo. Confía en ella.',
+      'Aprender es un acto de amor hacia tu alma. Permítete crecer hoy.',
+      'La creatividad no es un don exclusivo. Es tu derecho divino.',
+      'Mira con nuevos ojos. La maravilla está en cada detalle de tu vida.'
+    ],
+    affirmations:[
+      'Mi mente es un canal de inspiración divina',
+      'La creatividad fluye libremente a través de mí',
+      'Veo belleza y sabiduría en todo lo que me rodea',
+      'Soy un ser en constante expansión y aprendizaje'
+    ],
+    energies:['Iluminación · Creatividad · Belleza','Inspiración · Sabiduría · Genialidad','Aprendizaje · Belleza · Expansión']
+  },
+  {
+    name:'Arcángel Zadquiel', short:'Zadquiel', title:'Llama de Transformación', symbol:'⬡',
+    color1:'#300870', color2:'#8030d0', color3:'#b060f0',
+    glow:'rgba(128,48,208,0.5)', textColor:'#a058e0',
+    affirmationBg:'rgba(48,8,112,0.2)', segColors:['#280658','#600898'],
+    intros:[
+      'La llama violeta de Zadquiel consume todo lo que ya no te sirve.',
+      'Zadquiel extiende el fuego sagrado de la transmutación sobre tu pasado.',
+      'Una energía de profunda liberación está disponible para ti en este momento.',
+      'El Arcángel Zadquiel llega para ayudarte a soltar lo que ya fue.',
+      'La llama violeta purifica, transforma y renace. Es tuya hoy.'
+    ],
+    guides:[
+      'El perdón no es para el otro. Es el regalo más poderoso que puedes darte a ti mismo.',
+      'Lo que viviste no define lo que eres. Tu historia no es tu destino.',
+      'La transformación que temes ya está ocurriendo. Confía en el proceso.',
+      'Suelta. Deja ir. Lo nuevo no puede entrar si lo viejo ocupa todo el espacio.',
+      'Eres un ser de luz en constante proceso de renacimiento. Esto también pasará.',
+      'La alquimia espiritual convierte el dolor en sabiduría. Ese proceso ya comenzó.',
+      'Libera el pasado con gratitud. Todo lo que viviste te hizo quien eres hoy.'
+    ],
+    affirmations:[
+      'Me libero del pasado con amor y gratitud',
+      'El perdón me transforma y me libera',
+      'Renazco más fuerte y más libre cada día',
+      'La transformación fluye a través de mí con gracia'
+    ],
+    energies:['Transformación · Perdón · Liberación','Renacimiento · Alquimia · Renovación','Transmutación · Soltar · Renacimiento']
+  }
+];
+
+const CLOSES = [
+  'La luz ya está iluminando tu siguiente paso.',
+  'El cielo camina contigo en cada decisión.',
+  'Confía. Ya eres exactamente lo que necesitas ser.',
+  'Este mensaje es una semilla. Cuídala con tu atención.',
+  'El universo conspira siempre a tu favor.',
+  'Que esta luz guíe cada paso de tu día.',
+  'Recuerda: nunca estás solo. Los ángeles caminan contigo.',
+  'La gracia divina te acompaña en todo momento.'
+];
+
+// ═══════════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════════
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function generateMessage(arc){
+  return pick(arc.intros)+' '+pick(arc.guides)+' '+pick(CLOSES);
+}
+
+// ═══════════════════════════════════════════════
+//  STARS
+// ═══════════════════════════════════════════════
+const starCanvas=document.getElementById('starCanvas');
+const sCtx=starCanvas.getContext('2d');
+let stars=[];
+
+function initStars(){
+  starCanvas.width=window.innerWidth;
+  starCanvas.height=window.innerHeight;
+  stars=[];
+  for(let i=0;i<200;i++){
+    stars.push({
+      x:Math.random()*starCanvas.width,
+      y:Math.random()*starCanvas.height,
+      r:Math.random()*1.3+0.15,
+      a:Math.random()*0.8+0.1,
+      speed:Math.random()*0.003+0.0008,
+      phase:Math.random()*Math.PI*2
+    });
+  }
+}
+
+function drawStars(t){
+  sCtx.clearRect(0,0,starCanvas.width,starCanvas.height);
+  stars.forEach(s=>{
+    const alpha=s.a*(0.45+0.55*Math.sin(t*s.speed+s.phase));
+    sCtx.beginPath();
+    sCtx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    sCtx.fillStyle=`rgba(210,190,255,${alpha})`;
+    sCtx.fill();
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  PARTICLES
+// ═══════════════════════════════════════════════
+const pCanvas=document.getElementById('particleCanvas');
+const pCtx=pCanvas.getContext('2d');
+let particles=[];
+
+function initParticles(){
+  pCanvas.width=window.innerWidth;
+  pCanvas.height=window.innerHeight;
+}
+
+function spawnParticles(color,count,cx,cy){
+  cx=cx||window.innerWidth/2;
+  cy=cy||window.innerHeight*0.4;
+  for(let i=0;i<count;i++){
+    const angle=Math.random()*Math.PI*2;
+    const speed=Math.random()*2.5+0.4;
+    particles.push({
+      x:cx,y:cy,
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed-1.8,
+      r:Math.random()*2.8+0.6,
+      a:0.9,
+      color,
+      decay:Math.random()*0.009+0.003
+    });
+  }
+}
+
+function drawParticles(){
+  pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
+  particles=particles.filter(p=>p.a>0.02);
+  particles.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    p.vy+=0.025; p.a-=p.decay;
+    const c=p.color.replace(/[\d.]+\)$/,p.a.toFixed(2)+')');
+    pCtx.beginPath();
+    pCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    pCtx.fillStyle=c;
+    pCtx.fill();
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  WHEEL
+// ═══════════════════════════════════════════════
+const wCanvas=document.getElementById('wheelCanvas');
+const wCtx=wCanvas.getContext('2d');
+const W=284, CX=W/2, CY=W/2, R=130;
+let wheelAngle=0, spinning=false, currentArc=null, spinVel=0;
+const SYMBOLS=['⚔','🪶','✦','◈','♡','✺','⬡'];
+
+function drawWheel(t){
+  wCtx.clearRect(0,0,W,W);
+  const n=ARCHANGELS.length;
+  const segAngle=Math.PI*2/n;
+
+  for(let i=0;i<n;i++){
+    const startA=wheelAngle+i*segAngle-Math.PI/2;
+    const endA=startA+segAngle;
+    const mid=startA+segAngle/2;
+    const isActive=currentArc&&ARCHANGELS[i].name===currentArc.name;
+
+    // Segment gradient
+    const sg=wCtx.createLinearGradient(
+      CX+Math.cos(mid)*20, CY+Math.sin(mid)*20,
+      CX+Math.cos(mid)*R,  CY+Math.sin(mid)*R
+    );
+    sg.addColorStop(0, ARCHANGELS[i].segColors[0]);
+    sg.addColorStop(1, ARCHANGELS[i].segColors[1]);
+
+    wCtx.beginPath();
+    wCtx.moveTo(CX,CY);
+    wCtx.arc(CX,CY,R,startA,endA);
+    wCtx.closePath();
+    wCtx.fillStyle=sg;
+    wCtx.fill();
+
+    // Border
+    wCtx.strokeStyle=isActive?'rgba(255,240,180,0.9)':'rgba(40,30,60,0.9)';
+    wCtx.lineWidth=isActive?1.8:0.8;
+    wCtx.stroke();
+
+    // Symbol
+    const sr=R*0.67;
+    const sx=CX+Math.cos(mid)*sr;
+    const sy=CY+Math.sin(mid)*sr;
+    wCtx.save();
+    wCtx.translate(sx,sy);
+    if(isActive){
+      const pulse=1+0.08*Math.sin(t*0.004);
+      wCtx.scale(pulse,pulse);
+    }
+    wCtx.font='18px serif';
+    wCtx.textAlign='center';
+    wCtx.textBaseline='middle';
+    wCtx.fillStyle=isActive?'#ffe090':'rgba(220,200,255,0.82)';
+    if(isActive){
+      wCtx.shadowColor=ARCHANGELS[i].color2;
+      wCtx.shadowBlur=14;
+    }
+    wCtx.fillText(SYMBOLS[i],0,0);
+    wCtx.restore();
+  }
+
+  // Outer ring glow
+  const ringGrad=wCtx.createRadialGradient(CX,CY,R-6,CX,CY,R+6);
+  ringGrad.addColorStop(0,'rgba(200,160,80,0.35)');
+  ringGrad.addColorStop(1,'transparent');
+  wCtx.beginPath();
+  wCtx.arc(CX,CY,R+3,0,Math.PI*2);
+  wCtx.strokeStyle=ringGrad;
+  wCtx.lineWidth=7;
+  wCtx.stroke();
+
+  // Rim line
+  wCtx.beginPath();
+  wCtx.arc(CX,CY,R,0,Math.PI*2);
+  wCtx.strokeStyle='rgba(200,160,80,0.4)';
+  wCtx.lineWidth=1.5;
+  wCtx.stroke();
+
+  // Center cover (drawn by CSS overlay)
+}
+
+function getIndexAtTop(){
+  const n=ARCHANGELS.length, seg=Math.PI*2/n;
+  let a=((-wheelAngle+Math.PI/2)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
+  return Math.floor(a/seg)%n;
+}
+
+function spin(){
+  if(spinning)return;
+  spinning=true;
+  document.getElementById('spinBtn').disabled=true;
+  const n=ARCHANGELS.length;
+  const targetIndex=Math.floor(Math.random()*n);
+  const seg=Math.PI*2/n;
+  const current=((-wheelAngle+Math.PI/2)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
+  const diff=((targetIndex*seg)-current+Math.PI*2)%(Math.PI*2);
+  spinVel=diff+Math.PI*2*5;
+  spawnParticles('rgba(200,160,80,0.8)',35);
+}
+
+// ═══════════════════════════════════════════════
+//  MAIN LOOP
+// ═══════════════════════════════════════════════
+function loop(t){
+  requestAnimationFrame(loop);
+  drawStars(t);
+  drawParticles();
+
+  if(spinning){
+    const ease=Math.max(0.012, spinVel*0.016);
+    wheelAngle+=ease;
+    spinVel-=ease;
+    if(spinVel<=0){
+      spinning=false; spinVel=0;
+      const idx=getIndexAtTop();
+      currentArc=ARCHANGELS[idx];
+      document.getElementById('spinBtn').disabled=false;
+      document.getElementById('wheelGlow').style.boxShadow=
+        `0 0 70px ${currentArc.glow}, 0 0 140px ${currentArc.glow.replace('0.5','0.18')}`;
+      spawnParticles(currentArc.glow, 60);
+      updateArcTags();
+      setTimeout(()=>showCard(currentArc), 700);
+    }
+  }
+  drawWheel(t);
+}
+
+// ═══════════════════════════════════════════════
+//  ARC TAGS
+// ═══════════════════════════════════════════════
+function updateArcTags(){
+  const container=document.getElementById('arcNames');
+  container.innerHTML='';
+  ARCHANGELS.forEach(a=>{
+    const tag=document.createElement('div');
+    tag.className='arc-tag'+(currentArc&&currentArc.name===a.name?' active':'');
+    tag.style.color=a.textColor;
+    tag.style.borderColor=currentArc&&currentArc.name===a.name?a.color2:a.color2+'55';
+    if(currentArc&&currentArc.name===a.name){
+      tag.style.background=a.color1+'28';
+    }
+    tag.textContent=a.short;
+    container.appendChild(tag);
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  CARD
+// ═══════════════════════════════════════════════
+let currentMessage='';
+function showCard(arc){
+  currentMessage=generateMessage(arc);
+  const aff=pick(arc.affirmations);
+  const energy=pick(arc.energies);
+
+  document.getElementById('cardTopBar').style.background=
+    `linear-gradient(90deg,${arc.color1},${arc.color2},${arc.color3})`;
+  document.getElementById('cardArcName').textContent=arc.name;
+  document.getElementById('cardArcName').style.color=arc.textColor;
+  document.getElementById('cardArcTitle').textContent=arc.title;
+  document.getElementById('cardArcTitle').style.color=arc.textColor;
+  document.getElementById('cardSymbol').textContent=arc.symbol;
+  document.getElementById('cardSymbol').style.textShadow=`0 0 32px ${arc.glow}`;
+  document.getElementById('cardDivider').style.background=arc.color2;
+  document.getElementById('cardMessage').textContent=currentMessage;
+  document.getElementById('cardAffirmation').textContent='"'+aff+'"';
+  document.getElementById('cardAffirmation').style.color=arc.textColor;
+  document.getElementById('cardAffirmation').style.borderColor=arc.color2+'38';
+  document.getElementById('cardAffirmation').style.background=arc.affirmationBg;
+  document.getElementById('cardEnergy').textContent=energy;
+  document.getElementById('cardEnergy').style.color=arc.color2;
+  document.getElementById('messageCard').style.boxShadow=
+    `0 0 70px ${arc.glow.replace('0.5','0.28')}, 0 24px 70px rgba(0,0,0,0.65)`;
+  document.getElementById('btnFavorite').textContent='♡ Guardar';
+
+  document.getElementById('cardOverlay').classList.add('visible');
+  spawnParticles(arc.glow,22);
+  addHistory(arc, currentMessage);
+}
+
+function hideCard(){
+  document.getElementById('cardOverlay').classList.remove('visible');
+}
+
+// ═══════════════════════════════════════════════
+//  HISTORY
+// ═══════════════════════════════════════════════
+let history=[];
+function addHistory(arc,msg){
+  const now=new Date();
+  const time=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  history.unshift({arc,msg,time});
+  if(history.length>6)history.pop();
+  renderHistory();
+}
+
+function renderHistory(){
+  const list=document.getElementById('historyList');
+  if(!history.length){
+    list.innerHTML='<div class="history-empty">Gira la rueda para recibir tu primer mensaje</div>';
+    return;
+  }
+  list.innerHTML='';
+  history.forEach(h=>{
+    const item=document.createElement('div');
+    item.className='history-item';
+    item.style.borderLeftColor=h.arc.color2+'70';
+    item.innerHTML=`
+      <div class="hist-symbol">${h.arc.symbol}</div>
+      <div class="hist-info">
+        <div class="hist-name" style="color:${h.arc.textColor}">${h.arc.short}</div>
+        <div class="hist-preview">${h.msg.substring(0,58)}…</div>
+      </div>
+      <div class="hist-time">${h.time}</div>
+    `;
+    item.onclick=()=>showCard(h.arc);
+    list.appendChild(item);
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════════
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ═══════════════════════════════════════════════
+//  AMBIENT SOUND (Web Audio API)
+// ═══════════════════════════════════════════════
+let audioCtx=null, ambientOn=false, gainNode=null, osc1=null, osc2=null;
+function toggleAmbient(){
+  const btn=document.getElementById('ambientBtn');
+  if(!ambientOn){
+    try{
+      audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+      gainNode=audioCtx.createGain();
+      gainNode.gain.setValueAtTime(0,audioCtx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.04,audioCtx.currentTime+2);
+      gainNode.connect(audioCtx.destination);
+      // Two gentle sine waves — 432Hz & 528Hz
+      [432,528,396].forEach((freq,i)=>{
+        const o=audioCtx.createOscillator();
+        const g=audioCtx.createGain();
+        o.type='sine';
+        o.frequency.value=freq;
+        g.gain.value=i===0?0.6:0.3;
+        o.connect(g);g.connect(gainNode);
+        o.start();
+      });
+      ambientOn=true;
+      btn.textContent='♪';
+      btn.style.color='#e8c070';
+      showToast('♪ Música ambiental activada');
+    }catch(e){showToast('Audio no disponible en este navegador')}
+  } else {
+    if(gainNode){gainNode.gain.linearRampToValueAtTime(0,audioCtx.currentTime+1);}
+    setTimeout(()=>{if(audioCtx)audioCtx.close();audioCtx=null;},1100);
+    ambientOn=false;
+    btn.textContent='♪';
+    btn.style.color='#b8a070';
+    showToast('♪ Música ambiental desactivada');
+  }
+}
+
+// ═══════════════════════════════════════════════
+//  EVENTS
+// ═══════════════════════════════════════════════
+document.getElementById('spinBtn').onclick=spin;
+wCanvas.onclick=spin;
+document.getElementById('closeCard').onclick=hideCard;
+document.getElementById('cardOverlay').onclick=e=>{
+  if(e.target===document.getElementById('cardOverlay'))hideCard();
+};
+document.getElementById('btnNew').onclick=()=>{hideCard();setTimeout(spin,450);};
+document.getElementById('ambientBtn').onclick=toggleAmbient;
+document.getElementById('btnFavorite').onclick=()=>{
+  const btn=document.getElementById('btnFavorite');
+  const saved=btn.textContent==='♡ Guardar';
+  btn.textContent=saved?'♥ Guardado':'♡ Guardar';
+  showToast(saved?'✦ Mensaje guardado en favoritos':'✦ Eliminado de favoritos');
+};
+document.getElementById('btnShare').onclick=()=>{
+  if(currentArc&&navigator.share){
+    navigator.share({
+      title:'Mensajes de Luz ✦',
+      text:`${currentArc.name} te dice:\n\n${currentMessage}\n\n✦ mensajes-de-luz.app`
+    }).catch(()=>{});
+  } else {
+    try{
+      navigator.clipboard.writeText(`${currentArc?.name||''}\n\n${currentMessage}\n\n✦ Mensajes de Luz`);
+      showToast('✦ Mensaje copiado al portapapeles');
+    }catch(e){showToast('✦ Comparte tu mensaje con el mundo');}
+  }
+};
+
+// Keyboard
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')hideCard();
+  if(e.key===' '&&!spinning){e.preventDefault();spin();}
+});
+
+// Resize
+window.addEventListener('resize',()=>{initStars();initParticles();});
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+initStars();
+initParticles();
+updateArcTags();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
