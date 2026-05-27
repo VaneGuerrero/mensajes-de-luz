@@ -1,0 +1,22 @@
+{
+  "name": "Mensajes de Luz",
+  "short_name": "Mensajes de Luz",
+  "description": "Oracle angélico con los siete arcángeles principales",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#05030f",
+  "theme_color": "#05030f",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192x192/05030f/e8c060?text=✦",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512x512/05030f/e8c060?text=✦",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
